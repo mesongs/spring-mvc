@@ -29,6 +29,9 @@ public class OcrControllerJackson4_success {
 	@RequestMapping("/hello/hello6.do")
 	public ModelAndView ocrTest() {
 		
+		
+		// 지금 url로 사진 파일을 전달하고 있는데.. 그냥 파일로 전달하면 좋을 것 같아서..
+		// data요청할 때 base64인코딩해서 보내야하는 걸로 알고있어서 인코딩 시도해보는중
 		String strBase64 = "";
 		String fileName = "test.JPG";
 		String filePath = "C:\\Users\\HP\\git\\spring-mvc\\spring-mvc\\src\\main\\webapp\\resources\\img\\";
