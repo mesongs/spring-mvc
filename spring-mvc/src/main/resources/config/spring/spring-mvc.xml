@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+     
+	<context:component-scan base-package="kr.co.mlec" />
+	
+    <mvc:annotation-driven>
+    	
+    	<mvc:message-converters>
+    		<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+    			<property name="supportedMediaTypes">
+    				<list>
+    					<value>text/html; charset=utf-8</value>
+    				</list>
+    			</property>
+    		</bean>
+    		
+    		<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    			<property name="supportedMediaTypes">
+    				<list>
+    					<value>text/html; charset=utf-8</value>
+    					<value>application/json; charset=utf-8</value>
+    				</list>
+    			</property>
+    		</bean>
+    	</mvc:message-converters>
+    </mvc:annotation-driven>
+    
+    <!-- Controller를 거치지 않고, jsp로 바로 보냄 => view-name에 해당하는 jsp -->
+    <mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm"/>
+    <mvc:view-controller path="/ajax/ocr.do" view-name="ocr/ajaxOCR"/>
+    
+    
+    <bean id="multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize" value="10485760"></property>				 
+    </bean>
+    
+    
+    
+	<mvc:default-servlet-handler />
+	
+	<mvc:view-resolvers>
+		<!-- 포워드 시킬 파일의 실제 주소임 -->
+		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+	</mvc:view-resolvers>
+
+</beans>
